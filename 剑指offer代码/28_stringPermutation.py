@@ -1,35 +1,44 @@
-# # def permutation(str):
-# # 	if str == None:
-# # 		return
-# # 	support(str, 0)
+'''
+@Author: Darcy
+@Date: May, 17, 2017
+@Topic: permutation sequence for an array
+'''
 
-# def support(str, a):
-# 	size = len(str)
-# 	if a == size:
-# 		#result.append(str)
-# 		print str
-# 	else:
-# 		for i in range(a, size):
-# 			temp = str[i]
-# 			str[i] = str[a]
-# 			str[a] = temp
-# 			support(str, a + 1)
-# 			temp = str[i]
-# 			str[i] = str[a]
-# 			str[a] = temp
+def permutation(arr):
+	if arr == None or arr == []:
+		return
+	support(arr, 0)
 
-# if __name__ == "__main__":
-# 	result = []
-# 	#permutation([1,2,3])
-# 	support([1,2,4], 0)
-# 	print result
-import itertools
-result = list(itertools.permutations([0,1,2,3,4,5,6,7],8))
-count = 0
-for index, arr in enumerate(result):
-	for i in range(7):
-		for j in range(i + 1, 8):
-			if i - j == arr[i] - arr[j]:
-				count += 1
-print count
+def support(arr, begin):
+	if begin == len(arr):
+		print arr
+	for i in range(begin, len(arr)):
+		temp = arr[i]
+		arr[i] = arr[begin]
+		arr[begin] = temp
+		support(arr, begin + 1)
+		temp = arr[i]
+		arr[i] = arr[begin]
+		arr[begin] = temp
+permutation([1,2,3])
+from itertools import combinations
+def NQueens(n):
+	arr = range(n)
+	counts = 0
+	for p in combinations(arr, n):
+		result = check(p)
+		if result:
+			counts += 1
+	return counts
+
+def check(a):
+	for i in range(len(a)):
+		for j in range(i + 1, len(a)):
+			if i - j == a[i] - a[j] or j - i == a[i] - a[j]:
+				return False
+	return True
+print NQueens(8)
+
+
+
 
